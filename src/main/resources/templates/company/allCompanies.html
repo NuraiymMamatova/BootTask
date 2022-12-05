@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All companies</title>
+    <style>
+        table, th, td {
+            margin-top:180px;
+            border: 36px;
+            color: black;
+            width: 710px;
+        }
+    </style>
+</head>
+<body>
+<center>
+    <table>
+        <caption style="text-align: center; color: black"><h1>Companies</h1></caption>
+        <tr>
+            <th>Id</th>
+            <th>Company name</th>
+            <th>Located country</th>
+            <th>Count of students</th>
+            <th>Courses</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+        <div th:each="company:${allCompany}">
+            <tr>
+                <td>
+                    <p th:text="${company.id}"/>
+                </td>
+                <td>
+                    <p th:text="${company.companyName}"/>
+                </td>
+                <td>
+                    <p th:text="${company.locatedCountry}"/>
+                </td>
+                <td>
+                    <p th:text="${company.count}"/>
+                </td>
+                <td>
+                    <a th:href="@{/course_api/allOfCoursess/{id}(id=${company.id})}">
+                        <button style="width: 100px; height: 40px;">Courses</button>
+                    </a>
+                </td>
+
+                <td>
+                    <a th:href="@{/company_api/update(id = ${company.id})}">
+                        <button style="width: 100px; height: 40px;">Update</button>
+                    </a>
+                </td>
+
+                <td>
+                    <a th:href="@{/company_api/delete(id = ${company.id})}">
+                        <button style="width: 100px; height: 40px;">Delete</button>
+                    </a>
+                </td>
+
+            </tr>
+        </div>
+    </table>
+    <a th:href="@{/company_api/new}">
+        <button style="width: 100px; height: 40px;">Add</button>
+    </a>
+</center>
+</body>
+</html>

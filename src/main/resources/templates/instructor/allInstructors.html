@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All instructors</title>
+    <style>
+        table, th, td {
+            margin-top: 180px;
+            border: 36px;
+            color: black;
+            width: 710px;
+        }
+    </style>
+</head>
+<body>
+<center>
+    <table>
+        <caption style="text-align: center; color: black"><h1>Instructors</h1></caption>
+        <tr>
+            <th>Id</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Phone number</th>
+            <th>Email</th>
+            <th>Specialization</th>
+            <th>Count of students</th>
+            <th>Course</th>
+        </tr>
+        <div th:each="instructor:${allInstructor}">
+            <tr>
+                <td>
+                    <p th:text="${instructor.id}"/>
+                </td>
+                <td>
+                    <p th:text="${instructor.firstName}"/>
+                </td>
+                <td>
+                    <p th:text="${instructor.lastName}"></p>
+                </td>
+                <td>
+                    <p th:text="${instructor.phoneNumber}"/>
+                </td>
+                <td>
+                    <p th:text="${instructor.email}"></p>
+                </td>
+                <td>
+                    <p th:text="${instructor.specialization}"/>
+                </td>
+                <td>
+                    <p th:text="${instructor.count}"/>
+                </td>
+                <td>
+                    <form th:method="POST" th:action="@{/instructor_api/{instructorId}/assignInstructorToCourse(instructorId=${instructor.getId()})}">
+                        <select name="course" class="form-select form-select-sm" aria-label=".form-select-sm example" th:object="${course}" th:field="*{id}">
+                            <option th:each="course : ${courses}" th:value="${course.id}" th:text="${course.courseName}">
+                            </option>
+                        </select>
+                        <input type="submit" value="submit"/>
+                    </form>
+                </td>
+            </tr>
+        </div>
+    </table>
+    <a th:href="@{/course_api/allOfCourses/{id}(id=${id})}">
+        <button style="width: 100px; height: 40px;">Back</button>
+    </a>
+</center>
+</body>
+</html>

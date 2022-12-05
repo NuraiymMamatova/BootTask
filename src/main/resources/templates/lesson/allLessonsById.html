@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>All lessons</title>
+  <style>
+    table, th, td {
+      margin-top: 180px;
+      border: 36px;
+      color: black;
+      width: 710px;
+    }
+  </style>
+</head>
+<body>
+<center>
+  <table>
+    <caption style="text-align: center; color: black"><h1>Lessons</h1></caption>
+    <tr>
+      <th>Id</th>
+      <th>Lesson name</th>
+      <th>Course</th>
+      <th>Tasks</th>
+      <th>Update</th>
+      <th>Delete</th>
+    </tr>
+    <div th:each="lesson:${myAllLesson}">
+      <tr>
+        <td>
+          <p th:text="${lesson.id}"/>
+        </td>
+        <td>
+          <p th:text="${lesson.lessonName}"/>
+        </td>
+        <td>
+          <p th:text="${lesson.course.id}"/>
+        </td>
+        <td>
+          <a th:href="@{/task_api/allOfTaskss/{id}(id=${lesson.id})}">
+            <button style="width: 100px; height: 40px;">Tasks</button>
+          </a>
+        </td>
+        <td>
+          <a th:href="@{/lesson_api/update/{id}(id = ${lesson.id})}">
+            <button style="width: 100px; height: 40px;">Update</button>
+          </a>
+        </td>
+        <td>
+          <a th:href="@{/lesson_api/{courseId}/{id}/delete(courseId= ${courseId}, id = ${lesson.id})}">
+            <button style="width: 100px; height: 40px;">Delete</button>
+          </a>
+        </td>
+        <td>
+
+        </td>
+      </tr>
+    </div>
+  </table>
+  <a th:href="@{/lesson_api/{id}/new(id=${courseId})}">
+    <button style="width: 100px; height: 40px;">Add</button>
+  </a>
+  <a th:href="@{/lesson_api/allOfLessons/{id}(id=${courseId})}">
+    <button style="width: 100px; height: 40px;">All lessons</button>
+  </a>
+  <a th:href="@{/company_api/allOfCompanies}">
+    <button style="width: 100px; height: 40px;">Main page</button>
+  </a>
+</center>
+</body>
+</html>

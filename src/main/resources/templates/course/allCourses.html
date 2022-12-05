@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All courses</title>
+    <style>
+        table, th, td {
+            margin-top:180px;
+            border: 36px;
+            color: black;
+            width: 710px;
+        }
+    </style>
+</head>
+<body>
+<center>
+    <table>
+        <caption style="text-align: center; color: black"><h1>Courses</h1></caption>
+        <tr>
+            <th>Id</th>
+            <th>Course name</th>
+            <th>Duration</th>
+            <th>Description</th>
+            <th>Company</th>
+        </tr>
+        <div th:each="course:${allCourse}">
+            <tr>
+                <td>
+                    <p th:text="${course.id}"/>
+                </td>
+                <td>
+                    <p th:text="${course.courseName}"/>
+                </td>
+                <td>
+                    <p th:text="${course.duration}"></p>
+                </td>
+                <td>
+                    <p th:text="${course.description}"/>
+                </td>
+                <td>
+                    <p th:text="${course.company.id}"/>
+                </td>
+            </tr>
+        </div>
+    </table>
+    <a th:href="@{/course_api/allOfCoursess/{id}(id=${companyId})}">
+        <button style="width: 100px; height: 40px;">Back</button>
+    </a>
+</center>
+</body>
+</html>

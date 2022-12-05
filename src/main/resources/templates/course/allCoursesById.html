@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All courses</title>
+    <style>
+        table, th, td {
+            margin-top:180px;
+            border: 36px;
+            color: black;
+            width: 710px;
+        }
+    </style>
+</head>
+<body>
+<center>
+    <table>
+        <caption style="text-align: center; color: black"><h1>Courses</h1></caption>
+        <tr>
+            <th>Id</th>
+            <th>Course name</th>
+            <th>Duration</th>
+            <th>Description</th>
+            <th>Company</th>
+            <th>Lessons</th>
+            <th>Groups submit</th>
+            <th>Groups add</th>
+            <th>Instructors</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+        <div th:each="course:${myAllCourse}">
+            <tr>
+                <td>
+                    <p th:text="${course.id}"/>
+                </td>
+                <td>
+                    <p th:text="${course.courseName}"/>
+                </td>
+                <td>
+                    <p th:text="${course.duration}"></p>
+                </td>
+                <td>
+                    <p th:text="${course.description}"/>
+                </td>
+                <td>
+                    <p th:text="${course.company.id}"/>
+                </td>
+                <td>
+                    <a th:href="@{/lesson_api/allOfLessonss/{id}(id=${course.id})}">
+                        <button style="width: 100px; height: 40px">Lessons</button>
+                    </a>
+                </td>
+                <td>
+                    <form th:method="POST" th:action="@{/course_api/{courseId}/assignGroupToCourse(courseId=${course.getId()})}">
+                        <select name="group" class="form-select form-select-sm" aria-label=".form-select-sm example" th:object="${group}" th:field="*{id}">
+                            <option th:each="group : ${groups}" th:value="${group.id}" th:text="${group.groupName}">
+                            </option>
+                        </select>
+                        <input type="submit" value="submit"/>
+                    </form>
+                </td>
+                <td>
+                    <a th:href="@{/group_api/allOfGroupss/{id}(id=${course.id})}">
+                        <button style="width: 100px; height: 40px">All groups</button>
+                    </a>
+                </td>
+                <td>
+                    <a th:href="@{/instructor_api/allOfInstructorss/{id}(id=${course.id})}">
+                        <button style="width: 100px; height: 40px">Instructors</button>
+                    </a>
+                </td>
+                <td>
+                    <a th:href="@{/course_api/update/{id}(id = ${course.id})}">
+                        <button style="width: 100px; height: 40px;">Update</button>
+                    </a>
+                </td>
+                <td>
+                    <a th:href="@{/course_api/{companyId}/{id}/deleteCourse(companyId = ${companyId}, id=${course.id})}">
+                        <button style="width: 100px; height: 40px;">Delete</button>
+                    </a>
+                </td>
+            </tr>
+        </div>
+    </table>
+
+    <a th:href="@{/course_api/{id}/new(id=${companyId})}">
+        <button style="width: 100px; height: 40px;">Add</button>
+    </a>
+    <a th:href="@{/company_api/allOfCompanies}">
+        <button style="width: 100px; height: 40px;">Back</button>
+    </a>
+    <a th:href="@{/course_api/allOfCourses/{id}(id=${companyId})}">
+        <button style="width: 100px; height: 40px;">All courses</button>
+    </a>
+</center>
+</body>
+</html>

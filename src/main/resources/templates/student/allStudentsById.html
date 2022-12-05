@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All students by group id</title>
+    <style>
+        table, th, td {
+            margin-top: 180px;
+            border: 36px;
+            color: black;
+            width: 710px;
+        }
+    </style>
+</head>
+<body>
+<center>
+    <table>
+        <caption style="text-align: center; color: black"><h1>Students</h1></caption>
+        <tr>
+            <th>Id</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Phone number</th>
+            <th>Email</th>
+            <th>Study format</th>
+            <th>Group</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+        <div th:each="student:${myAllStudent}">
+            <tr>
+                <td>
+                    <p th:text="${student.id}"/>
+                </td>
+                <td>
+                    <p th:text="${student.firstName}"/>
+                </td>
+                <td>
+                    <p th:text="${student.lastName}"></p>
+                </td>
+                <td>
+                    <p th:text="${student.phoneNumber}"/>
+                </td>
+                <td>
+                    <p th:text="${student.email}"></p>
+                </td>
+                <td>
+                    <p th:text="${student.studyFormat}"/>
+                </td>
+                <td>
+                    <p th:text="${student.group.id}"/>
+                </td>
+                <td>
+                    <a th:href="@{/student_api/update/{id}(id = ${student.id})}">
+                        <button style="width: 100px; height: 40px;">Update</button>
+                    </a>
+                </td>
+                <td>
+                    <a th:href="@{/student_api/{groupId}/{id}/delete(groupId = ${groupId}, id = ${student.id})}">
+                        <button style="width: 100px; height: 40px;">Delete</button>
+                    </a>
+                </td>
+                <td>
+
+                </td>
+            </tr>
+        </div>
+    </table>
+    <a th:href="@{/student_api/{id}/new(id=${groupId})}">
+        <button style="width: 100px; height: 40px;">Add</button>
+    </a>
+    <a th:href="@{/student_api/allOfStudents/{id}(id=${groupId})}">
+        <button style="width: 100px; height: 40px;">All students</button>
+    </a>
+</center>
+</body>

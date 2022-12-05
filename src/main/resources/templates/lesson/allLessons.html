@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>All lessons</title>
+  <style>
+    table, th, td {
+      margin-top: 180px;
+      border: 36px;
+      color: black;
+      width: 710px;
+    }
+  </style>
+</head>
+<body>
+<center>
+  <table>
+    <caption style="text-align: center; color: black"><h1>Lessons</h1></caption>
+    <tr>
+      <th>Id</th>
+      <th>Lesson name</th>
+      <th>Course</th>
+    </tr>
+    <div th:each="lesson:${allLesson}">
+      <tr>
+        <td>
+          <p th:text="${lesson.id}"/>
+        </td>
+        <td>
+          <p th:text="${lesson.lessonName}"/>
+        </td>
+        <td>
+          <p th:text="${lesson.course.id}"/>
+        </td>
+      </tr>
+    </div>
+  </table>
+  <a th:href="@{/company_api/allOfCompanies}">
+    <button style="width: 100px; height: 40px;">Back</button>
+  </a>
+</center>
+</body>
+</html>

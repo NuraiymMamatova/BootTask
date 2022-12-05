@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Save group</title>
+</head>
+<body>
+<center style="margin-top: 255px">
+    <form th:action="@{/group_api/{id}/save(id=${courseId})}" th:object="${newGroup}" th:method="POST">
+        <input type="hidden" name="id" th:field="*{id}">
+        <p>Group name: <input type="text" th:field="*{groupName}" placeholder="group name"/></p>
+        <p>Date of start: <input type="date" th:field="*{dateOfStart}" placeholder="date of start"/></p>
+        <p>Image: <input type="text" th:field="*{image}" placeholder="image"/></p>
+        <p><input type="submit" value="Submit"/></p>
+    </form>
+</center>
+</body>
+</html>

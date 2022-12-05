@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All instructors</title>
+    <style>
+        table, th, td {
+            margin-top: 180px;
+            border: 36px;
+            color: black;
+            width: 710px;
+        }
+    </style>
+</head>
+<body>
+<center>
+    <table>
+        <caption style="text-align: center; color: black"><h1>Instructors</h1></caption>
+        <tr>
+            <th>Id</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Phone number</th>
+            <th>Email</th>
+            <th>Specialization</th>
+            <th>Count of students</th>
+            <th>Course</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+        <div th:each="instructor:${myAllInstructor}">
+            <tr>
+                <td>
+                    <p th:text="${instructor.id}"/>
+                </td>
+                <td>
+                    <p th:text="${instructor.firstName}"/>
+                </td>
+                <td>
+                    <p th:text="${instructor.lastName}"></p>
+                </td>
+                <td>
+                    <p th:text="${instructor.phoneNumber}"/>
+                </td>
+                <td>
+                    <p th:text="${instructor.email}"></p>
+                </td>
+                <td>
+                    <p th:text="${instructor.specialization}"/>
+                </td>
+
+                <td>
+                    <p th:text="${instructor.count}"/>
+                </td>
+                <td>
+                    <p th:text="${instructor.course.id}"/>
+                </td>
+                <td>
+                    <a th:href="@{/instructor_api/update/{id}(id = ${instructor.id})}">
+                        <button style="width: 100px; height: 40px;">Update</button>
+                    </a>
+                </td>
+                <td>
+                    <a th:href="@{/instructor_api/{courseId}/{id}/delete(courseId = ${courseId}, id = ${instructor.id})}">
+                        <button style="width: 100px; height: 40px;">Delete</button>
+                    </a>
+                </td>
+                <td>
+
+                </td>
+            </tr>
+        </div>
+    </table>
+    <a th:href="@{/instructor_api/{id}/new(id=${courseId})}">
+        <button style="width: 100px; height: 40px;">Add</button>
+    </a>
+    <a th:href="@{/instructor_api/allOfInstructors/{id}(id=${courseId})}">
+        <button style="width: 100px; height: 40px;">All instructors</button>
+    </a>
+    <a th:href="@{/company_api/allOfCompanies}">
+        <button style="width: 100px; height: 40px;">Main page</button>
+    </a>
+</center>
+</body>
+</html>

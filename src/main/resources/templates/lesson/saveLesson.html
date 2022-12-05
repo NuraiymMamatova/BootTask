@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Save lesson</title>
+  <style>
+    table, th, td {
+      margin-top: 255px;
+      border: 36px;
+      color: black;
+      width: 710px;
+    }
+  </style>
+</head>
+<body>
+<center style="margin-top: 255px">
+  <form class="row g-3"
+        th:action="@{/lesson_api/{id}/save(id=${courseId})}"
+        th:object="${newLesson}"
+        th:method="POST" >
+    <p>Id: <input type="hidden" th:field="*{id}"/></p>
+    <p>Lesson name:
+      <input   class="form-control is-valid" id="lessonName" type="text" th:field="*{lessonName}" placeholder="lesson name"/>
+    </p>
+    <p><input type="submit" value="Submit"/></p>
+  </form>
+</center>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Save company</title>
+</head>
+<body>
+<center style="margin-top: 255px">
+    <caption style="text-align: center; color: black;"><h1>Save company</h1></caption>
+    <form th:method="POST" th:action="@{save}" th:object="${newCompany}">
+        <p>Company name: <input type="text" th:field="*{companyName}" placeholder="company name"/></p>
+        <p>Located country: <input type="text" th:field="*{locatedCountry}" placeholder="located country"/></p>
+        <p><input type="submit" value="Submit"/></p>
+    </form>
+</center>
+</body>
+</html>
