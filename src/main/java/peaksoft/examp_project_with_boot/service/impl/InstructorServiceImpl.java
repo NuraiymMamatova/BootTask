@@ -3,7 +3,9 @@ package peaksoft.examp_project_with_boot.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import peaksoft.examp_project_with_boot.entity.Course;
+import peaksoft.examp_project_with_boot.entity.Group;
 import peaksoft.examp_project_with_boot.entity.Instructor;
+import peaksoft.examp_project_with_boot.entity.Student;
 import peaksoft.examp_project_with_boot.repository.CourseRepository;
 import peaksoft.examp_project_with_boot.repository.InstructorRepository;
 import peaksoft.examp_project_with_boot.service.InstructorService;
@@ -82,6 +84,13 @@ public class InstructorServiceImpl implements InstructorService {
                 }
             }
         }
+        Long count = 0L;
+        for (Group group : course.getGroups()) {
+           for (Student student : group.getStudents()) {
+               count++;
+           }
+        }
+        instructor.setCount(count);
         course.addInstructor(instructor);
         instructor.setCourse(course);
         courseRepository.save(course);

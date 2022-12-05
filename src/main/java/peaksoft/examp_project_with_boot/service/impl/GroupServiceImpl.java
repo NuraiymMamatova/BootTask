@@ -4,13 +4,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import peaksoft.examp_project_with_boot.entity.Course;
 import peaksoft.examp_project_with_boot.entity.Group;
+import peaksoft.examp_project_with_boot.entity.Instructor;
+import peaksoft.examp_project_with_boot.entity.Student;
 import peaksoft.examp_project_with_boot.repository.CourseRepository;
 import peaksoft.examp_project_with_boot.repository.GroupRepository;
 import peaksoft.examp_project_with_boot.service.GroupService;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 @RequiredArgsConstructor
@@ -31,6 +33,18 @@ public class GroupServiceImpl implements GroupService {
     @Override
     public void deleteGroup(Long id) {
         Group group = groupRepository.getById(id);
+        List<Student> students = group.getStudents();
+        Long count = students.stream().count();
+        for (Course course : group.getCourses()) {
+            Long count1 = course.getCompany().getCount();
+            count1 -= count;
+            course.getCompany().setCount(count1);
+            for (Instructor instructor : course.getInstructors()) {
+                Long count2 = instructor.getCount();
+                count2 -= count;
+                instructor.setCount(count2);
+            }
+        }
         groupRepository.delete(group);
 
     }
