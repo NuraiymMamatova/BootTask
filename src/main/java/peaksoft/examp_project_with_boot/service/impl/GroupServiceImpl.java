@@ -46,7 +46,6 @@ public class GroupServiceImpl implements GroupService {
             }
         }
         groupRepository.delete(group);
-
     }
 
     @Override

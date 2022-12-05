@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import peaksoft.examp_project_with_boot.entity.Company;
 import peaksoft.examp_project_with_boot.entity.Course;
+import peaksoft.examp_project_with_boot.entity.Group;
+import peaksoft.examp_project_with_boot.entity.Student;
 import peaksoft.examp_project_with_boot.repository.CompanyRepository;
 import peaksoft.examp_project_with_boot.repository.CourseRepository;
 import peaksoft.examp_project_with_boot.service.CourseService;
@@ -28,6 +30,16 @@ public class CourseServiceImpl implements CourseService{
 
     @Override
     public void deleteCourse(Long id) {
+        Course course = courseRepository.findById(id).get();
+        Long count = 0L;
+        for (Group group : course.getGroups()) {
+            for (Student student : group.getStudents()) {
+                count++;
+            }
+        }
+        Long count1 = course.getCompany().getCount();
+        count1 -= count;
+        course.getCompany().setCount(count1);
         courseRepository.deleteById(id);
     }
 
