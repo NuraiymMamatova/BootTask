@@ -23,12 +23,13 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "task_seq")
     private Long id;
 
-    @Column(name = "task_name")
+    @Column(name = "task_name", nullable = false)
     private String taskName;
 
-    @Column(name = "task_text")
+    @Column(name = "task_text", nullable = false)
     private String taskText;
 
+    @Column(nullable = false)
     private Date deadline;
 
     @ManyToOne(cascade = {MERGE, REFRESH, DETACH, PERSIST}, fetch = FetchType.EAGER)

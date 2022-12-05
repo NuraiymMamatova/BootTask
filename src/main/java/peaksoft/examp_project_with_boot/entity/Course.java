@@ -24,7 +24,7 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "course_seq")
     private Long id;
 
-    @Column(name = "course_name")
+    @Column(name = "course_name", nullable = false)
     private String courseName;
 
     private Integer duration;

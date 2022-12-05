@@ -23,10 +23,10 @@ public class Group {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "group_seq")
     private Long id;
 
-    @Column(name = "group_name")
+    @Column(name = "group_name", nullable = false)
     private String groupName;
 
-    @Column(name = "date_of_start")
+    @Column(name = "date_of_start", nullable = false)
     private Date dateOfStart;
 
     private String image;

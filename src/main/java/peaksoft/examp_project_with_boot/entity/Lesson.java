@@ -24,7 +24,7 @@ public class Lesson {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "lesson_seq")
     private Long id;
 
-    @Column(name = "lesson_name")
+    @Column(name = "lesson_name", nullable = false)
     private String lessonName;
 
     @ManyToOne(cascade = {MERGE, REFRESH, DETACH,  PERSIST}, fetch = FetchType.EAGER)
