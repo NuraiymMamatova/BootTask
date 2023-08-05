@@ -24,6 +24,9 @@ public class InstructorServiceImpl implements InstructorService {
     @Override
     public void saveInstructor(Long id, Instructor instructor) throws IOException {
         Course course = courseRepository.findById(id).get();
+        validator(instructor.getPhoneNumber().replace(" ", ""), instructor.getLastName()
+                .replace(" ", ""), instructor.getFirstName()
+                .replace(" ", ""));
         for (Instructor i : course.getInstructors()) {
             try {
                 if (i.getEmail().equals(instructor.getEmail()))
@@ -32,9 +35,7 @@ public class InstructorServiceImpl implements InstructorService {
                 throw new IOException("This email already exists!");
             }
         }
-        validator(instructor.getPhoneNumber().replace(" ", ""), instructor.getLastName()
-                .replace(" ", ""), instructor.getFirstName()
-                .replace(" ", ""));
+
         instructorRepository.save(instructor);
 
     }

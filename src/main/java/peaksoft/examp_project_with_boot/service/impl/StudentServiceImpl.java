@@ -25,6 +25,10 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void saveStudent(Long id, Student student) throws IOException {
         Group group = groupRepository.findById(id).get();
+        validator(student.getPhoneNumber().replace(" ", ""), student.getLastName()
+                .replace(" ", ""), student.getFirstName()
+                .replace(" ", ""));
+        group.addStudents(student);
         for (Course course : group.getCourses()) {
             course.getCompany().plus();
 
@@ -34,10 +38,7 @@ public class StudentServiceImpl implements StudentService {
                 instructor.plus();
             }
         }
-        validator(student.getPhoneNumber().replace(" ", ""), student.getLastName()
-                .replace(" ", ""), student.getFirstName()
-                .replace(" ", ""));
-        group.addStudents(student);
+
         student.setGroup(group);
         groupRepository.save(group);
 
